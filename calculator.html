@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<head>
+<title>Cocatech Enterprises</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<link rel="Shortcut Icon" type="image/ico" href="favicon.ico" />
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.jcarousel.css" />
+<link rel="stylesheet" type="text/css" href="css/colorbox.css" />
+<link rel="stylesheet" type="text/css" href="css/jcarousel.skin.full.css" />
+<link href="css/ddsmoothmenu.css" rel="stylesheet" type="text/css" />
+
+<!--[if lte IE 6]>
+	<link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" />
+<![endif]-->
+
+<!--[if IE 7]>
+	<link rel="stylesheet" type="text/css" href="css/ie7.css" media="screen" />
+<![endif]-->
+
+
+<!-- JQUERY Library -->
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/colorbox/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="js/jcarousel/jquery.jcarousel.pack.js"></script>
+<script type="text/javascript" src="js/fadeinout.js"></script>
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/Museo_Sans_500.font.js"></script>
+<script type="text/javascript" src="js/fontconfig.js"></script>
+<script type="text/javascript" src="js/menu/ddsmoothmenu.js">
+/***********************************************
+* Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+</script>
+
+<script type="text/javascript">
+
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({
+	scroll: 4,
+	wrap: 'both'
+	});
+});
+
+</script>
+<script type="text/javascript" src="js/common.js"></script>
+</head>
+
+<body>
+
+<div id="pagecontainer"> <!-- Outside Container -->
+	<div id="mainpage"> 
+	
+		<div id="header"> 
+			
+			<div id="smoothmenu1" class="ddsmoothmenu"><!-- The Menu -->
+				<ul>
+					<!-- Menu Item Start-->
+					<li class="current-menu-item"><a href="index.html">Home</a>
+						<!-- Dropdown menu -->
+						
+						<!-- Dropdown end -->
+					</li>
+					<!-- Menu Item End -->
+					<li><a href="page.html">About</a>
+						<ul>
+							<li><a href="page.html">Company</a>
+							<ul>
+								<li><a href="page.html">History</a></li>
+								<li><a href="page.html">Profile</a></li>
+							</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="portfolio-category.html">Products</a>
+						<ul>
+							<li><a href="portfolio-category.html">Solar lamps</a>
+                            <ul>
+                            <li><a href="portfolio-items.html">Beacons</a></li>
+							<li><a href="portfolio-carousel.html">Fosera</a></li>
+                         </ul>
+                    </li>
+							
+							<li><a href="portfolio-recent.html">Solar Water heaters</a>
+                            
+                        <ul>
+							<li><a href="portfolio-gallery.html">Benefits</a></li>
+							<li><a href="portfolio-galleryset.html">Direct Systems</a></li>
+							<li><a href="fullwidth-portfolioslides.html">Indirect Systems</a></li>
+						</ul></ul>
+					</li>
+					
+					<!-- Menu Single Item -->
+					<li><a href="page.html">Solar Energy Calculator</a></li>
+					<li><a href="contact.php">Contact us</a></li>
+				</ul>
+				<br style="clear: left" />
+			</div>
+			<!-- End of Menu -->
+			
+			<div id="logo"><a href="index.html"><img src="images/logo.png" alt="logo" /></a></div>
+		</div> <!-- Close Header -->
+		<div id="contents">
+<h1>Off Grid Calculator</h1>
+		  <script type="text/javascript">
+		function doMath()
+		{
+			// Battery bank calculations
+			whpd = document.getElementById('off_whpd').value;
+			bkup_days = document.getElementById('off_backup_days').value; 
+			lowest_temp = document.getElementById('off_lowest_batt_temp').value; 
+			batt_voltage = document.getElementById('off_batt_bank_voltage').value;
+	
+			// Battery wattage sizing
+			var bb_wh = whpd * 2;	// discharge (@50%)
+			bb_wh *=1.15; 			// Inefficiencies
+			bb_wh *= bkup_days;		// no-sun days
+			bb_wh *= lowest_temp;	// Adjust for temp
+	
+			// battery bank capacity
+			bb_cap = Math.ceil(bb_wh / batt_voltage);
+			// 3 string config
+			per_string = Math.ceil(bb_cap / 3.0);
+	
+			document.getElementById('battOut1').innerHTML = 'Battery Bank Capacity: <strong>' + Math.ceil(bb_wh) + ' watt hours</strong>';
+			  
+			document.getElementById('battOut2').innerHTML = 'Battery Bank Capacity: <strong>'+bb_cap+' amp hours</strong><br>'+
+															'3 String Configuration: <strong>'+per_string+' amp hours</strong> per string';
+	
+			// panel/inverter calculations
+			kwh_per_month = (whpd*30)/1000; //document.getElementById('og_kwhpm').value;
+			sunhrs = document.getElementById('og_loc_avg_sun_hrs').value;
+	
+			kwatts = (kwh_per_month/30 / sunhrs) * 1.3;
+			if(!isNaN(kwatts))
+			{
+				document.getElementById('og_min_watts').value = round2(kwatts*1000,1);
+				document.getElementById('og_min_kwatts').value = round2(kwatts,2);
+			}
+			panelwatts = document.getElementById('og_sp_wattage_select').value;
+			if(!isNaN(panelwatts) && panelwatts > 0)
+			{
+				numpanels = Math.ceil((kwatts / panelwatts)*1000);
+				totalwatts = numpanels * panelwatts;
+				cc_amps = Math.ceil(totalwatts / batt_voltage);
+				
+				document.getElementById('og_total_watts').value = totalwatts;
+				document.getElementById('og_total_panels').value = numpanels;
+				document.getElementById('og_inverter_watts').value = cc_amps;
+				
+			}
+		}
+		function round2(rnum, rlen) 
+		{
+			  return Math.round(rnum*Math.pow(10,rlen))/Math.pow(10,rlen);
+		}
+		  </script>
+		  <!-- Battery bank sizing -->
+		  <form name="calc">
+		    <!-- Place this tag where you want the +1 button to render -->
+		    <g:plusone size="small" annotation="inline"></g:plusone>
+		    <!-- Place this render call where appropriate -->
+		    <script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+            </script>
+		    <p style="padding-left:2em;margin-top:1em;"><em>Cocatech's Solar energy Calculator helps you determine the recommended battery size, watts of solar panels and the solar charge controller you need. The 
+		      calculator assumes you will need to size your system to get you through average 
+		      amount of sun-light in the <u>least sunniest month of the year</u> for your 
+		      location.  Feel 
+		      free to call our knowledgeable technical sales staff toll free at<strong> 0 711 851 762</strong>and have them help you find the system that fits your needs. </em></p>
+		    <!-- Name/Date boxes -->
+		    <h2>Battery Bank Sizing</h2>
+		    <div style="padding-left:2em"> This
+		      calculator will help you size the battery bank for your system.
+		      <div class="halfspace"></div>
+		      <div class="box">
+		        <h3>Step 1:</h3>
+		        <h4>Your Daily Energy Usage</h4>
+		        Watt Hours per Day:
+		        <input type="text" name="off_whpd" id="off_whpd" value="" onchange="doMath();">
+		        <p style="padding-left:2em;margin-top:1em;"> <em>Take each appliance, confirm the wattage and multiply by the number of hours it will be in use. (example 5 bulbs of 15 Watts each used for 5 hours. </em><em>If you are not sure about the consumption, please use our <a href="../../../howto/Load-Calculator/a74/load_calculator.html" target="_blank">Load 
+		              Calculator</a> to go through the steps to determine this value. </em></p>
+		        <p style="padding-left:2em;margin-top:1em;"><em>Is your energy usage too 
+		          high? </em><em>Don't despair, our knowledgeable sales folks can help you 
+		            find other potential solutions. Please call us on 0720 248 916.</em></p>
+	          </div>
+		      <div class="box">
+		        <h3>Step 2:</h3>
+		        <h4>How Many Days Should Your System Run without Sun?</h4>
+		        <p style="padding-left:2em;margin-top:1em;"> <em> How many days of backup power do you want in case of cloudy/rainy days? (when your solar panels will produce little energy) For those who live in extrimely called regions with short sun duration. If its average or more put 1 day</em></p>
+		        <input type="text" name="off_backup_days" id="off_backup_days" size="4" value="2" onchange="doMath();">
+	          </div>
+		      <div class="box">
+		        <h3>Step 3:</h3>
+		        <h4>Adjust the Effective Capacity of Your Battery Bank Due to Low Temperatures</h4>
+		        <p style="padding-left:2em;margin-top:1em;"><em>What is the lowest temperature your battery bank will experience? </em></p>
+		        <select name="off_lowest_batt_temp" id="off_lowest_batt_temp" onchange="doMath();">
+		          <option value="1">80F (27C)</option>
+		          <option value="1.04">70F (21C)</option>
+		          <option value="1.11">60F (16C)</option>
+		          <option value="1.19" selected>50F (10C)</option>
+		          <option value="1.3">40F (4C)</option>
+		          <option value="1.4">30F (-1C)</option>
+		          <option value="1.59">20F (-7C)</option>
+	            </select>
+		        Degrees </div>
+		      <div class="box">
+		        <h3>Results:</h3>
+		        <div id="battOut1" style="margin:1em;"></div>
+		        <em>Select a battery bank voltage:</em>
+		        <select name="off_batt_bank_voltage" id="off_batt_bank_voltage" onchange="doMath();">
+		          <option value="12">12</option>
+		          <option value="24" selected>24</option>
+		          <option value="48">48</option>
+	            </select>
+		        <div class="clearer"></div>
+		        <div style="margin:1em;">
+		          <div class="info" id="battOut2"></div>
+	            </div>
+		        <div class="halfspace"><font class='ee107'><em>Note: All calculations assume only a 50% discharge 
+		          to your batteries to optimize battery life.</em></font>		        </div>
+		        <div class="halfspace"></div>
+		      </div>
+	        </div>
+		    <!-- solar array + inverter -->
+		    <div class="space"></div>
+		    <h2>Solar Panel and Solar Charge Controller Sizing</h2>
+		    <div style="padding-left:2em">
+		  <em>  This calculator helps you size the solar panel(s) and charge controller(s) needed for your system.</em>
+		    <div class="halfspace"></div>
+		    <!-- Step 1 -->
+		    <div class="box">
+		      <h3>Step 1:</h3>
+		      <h4>Determine the Solar Exposure for Your Site</h4>
+		      <p><em>You need to determine the average number of sun-hours per day during the <u>least sunniest</u> month of the year (not the whole year).</em></p>
+		      <div class="box" style="margin-left:2em" >
+		        <p> Select the State-City
+		          Closest to your location (currently only US states are provided) </p>
+		        <p>
+		          <select name="og_loc_select" id="og_loc_select" onchange="document.getElementById('og_loc_avg_sun_hrs').value=this.value; doMath(); return false;">
+		            <option value="0" selected>- Select a City - </option>
+		            <option value="0.3">AK - Fairbanks</option>
+		            <option value="0.8">AK - Yakutat</option>
+		            <option value="3.7">AL - Montgomery</option>
+		            <option value="3.7">AR - Fort Smith</option>
+		            <option value="3.5">AR - Little Rock</option>
+		            <option value="5.1">AZ - Tucson</option>
+		            <option value="4.9">AZ - Prescott</option>
+		            <option value="4.9">AZ - Phoenix</option>
+		            <option value="4.5">CA - Santa Maria</option>
+		            <option value="3.4">CA - San Francisco</option>
+		            <option value="3.2">CA - Bakersfield</option>
+		            <option value="2.8">CA - Fresno</option>
+		            <option value="4.2">CA - Los Angeles</option>
+		            <option value="5.2">CA - Daggett</option>
+		            <option value="4.2">CA - Long Beach</option>
+		            <option value="2.8">CA - Arcata</option>
+		            <option value="3.9">CO - Eagle</option>
+		            <option value="4.6">CO - Pueblo</option>
+		            <option value="4.1">CO - Grand Junction</option>
+		            <option value="4.2">CO - Boulder</option>
+		            <option value="2.8">CT - Bridgeport</option>
+		            <option value="2.7">CT - Hartford</option>
+		            <option value="3">DE - Wilmington</option>
+		            <option value="3.1">DC - Washington</option>
+		            <option value="3.9">FL - Jacksonville</option>
+		            <option value="4.7">FL - Key West</option>
+		            <option value="4.5">FL - Miami</option>
+		            <option value="4">FL - Tallahassee</option>
+		            <option value="4.4">FL - Tampa</option>
+		            <option value="3.7">GA - Atlanta</option>
+		            <option value="3.9">GA - Savannah</option>
+		            <option value="4.8">HI - Honolulu</option>
+		            <option value="3">IA - Des Moines</option>
+		            <option value="2.6">ID - Boise</option>
+		            <option value="2.8">IA - Waterloo</option>
+		            <option value="2.4">IL - Chicago</option>
+		            <option value="2.6">IN - Indianapolis</option>
+		            <option value="3.4">KS - Topeka</option>
+		            <option value="4.2">KS - Dodge City</option>
+		            <option value="2.7">KY - Lexington</option>
+		            <option value="3.7">LA - Lake Charles</option>
+		            <option value="3.7">LA - New Orleans</option>
+		            <option value="3.7">LA - Shreveport</option>
+		            <option value="2.8">MA - Worcester</option>
+		            <option value="2.9">MA - Boston</option>
+		            <option value="3.1">MD - Baltimore</option>
+		            <option value="2.5">ME - Caribou</option>
+		            <option value="3">ME - Portland</option>
+		            <option value="2.2">MI - Saulte Ste. Marie</option>
+		            <option value="2">MI - Lansing</option>
+		            <option value="2.6">MN - St. Cloud</option>
+		            <option value="3.2">MO - Columbia</option>
+		            <option value="3.1">MO - St. Louis</option>
+		            <option value="3.5">MS - Meridian</option>
+		            <option value="2.6">MT - Glasgow</option>
+		            <option value="2.7">MT - Great Falls</option>
+		            <option value="3">MT - Miles City</option>
+		            <option value="3.6">NC - Charlotte</option>
+		            <option value="3.6">NC - Cape Hatteras</option>
+		            <option value="3.6">NC - Greensboro</option>
+		            <option value="3">ND - Bismarck</option>
+		            <option value="3.2">NE - Omaha</option>
+		            <option value="2.8">NJ - Newark</option>
+		            <option value="5">NM - Albuquerque</option>
+		            <option value="4.9">NV - Las Vegas</option>
+		            <option value="4.3">NV - Ely</option>
+		            <option value="2.1">NY - Binghamton</option>
+		            <option value="1.9">NY - Buffalo</option>
+		            <option value="2.4">NY - Albany</option>
+		            <option value="2">NY - Syracuse</option>
+		            <option value="2.8">NY - New York City</option>
+		            <option value="2.2">OH - Columbus</option>
+		            <option value="1.9">OH - Cleveland</option>
+		            <option value="3.7">OK - Tulsa</option>
+		            <option value="4.1">OK - Oklahoma City</option>
+		            <option value="1.7">OR - Astoria</option>
+		            <option value="1.6">OR - Portland</option>
+		            <option value="1.9">OR - Medford</option>
+		            <option value="2.1">PA - Pittsburgh</option>
+		            <option value="1.8">PA - Erie</option>
+		            <option value="4.8">PR - San Juan</option>
+		            <option value="2.9">RI - Providence</option>
+		            <option value="3.9">SC - Charleston</option>
+		            <option value="3.4">SD - Rapid City</option>
+		            <option value="3.1">TN - Nashville</option>
+		            <option value="3.4">TN - Memphis</option>
+		            <option value="4.1">TX - San Antonio</option>
+		            <option value="3.6">TX - Brownsville</option>
+		            <option value="5.1">TX - El Paso</option>
+		            <option value="4.1">TX - Waco</option>
+		            <option value="4.1">TX - Fort Worth</option>
+		            <option value="2.9">UT - Salt Lake City</option>
+		            <option value="4.4">UT - Cedar City</option>
+		            <option value="3.3">VA - Richmond</option>
+		            <option value="2.1">VT - Burlington</option>
+		            <option value="1.4">WA - Seattle</option>
+		            <option value="1.3">WA - Olympia</option>
+		            <option value="2.6">WI - Green Bay</option>
+		            <option value="2.6">WI - Madison</option>
+		            <option value="2.6">WV - Charleston</option>
+		            <option value="4">WY - Lander</option>
+	              </select>
+	            </p>
+		        <p> <b>or</b> <br>
+		          <br>
+		          Manually 
+		          enter the average sun-hours for your location. <br>
+		          <input type="text" name="og_loc_avg_sun_hrs" id="og_loc_avg_sun_hrs" value="" size="6" onChange="doMath();">
+		          <em><br>
+		            You can use this <a href="http://www.altestore.com/howto/Tools-Calculators-Reference/Reference-Materials/Solar-Insolation-Map-World/a43/" target="_blank">world 
+		              map of solar insolation values</a> to determine an estimate of sun-hours 
+		            for your location.</em></p>
+	          </div>
+	        </div>
+		    <!-- Step 2 -->
+		    <div class="box">
+		      <h3> Step 2: </h3>
+		      <h4>Sizing Your Solar Panel Power Needed</h4>
+		      <p> The total wattage of
+		        Solar Panels that you need is: </p>
+		      <input type="text" name="og_min_watts" id="og_min_watts" value="" readonly>
+		      <b>Watts, or</b>
+		      <input type="text" name="og_min_kwatts" id="og_min_kwatts" value="" readonly>
+		      <b>kilowatts</b>
+		      <p> This value
+		        takes into account losses due to system inefficiencies. </p>
+	        </div>
+		    <!-- Step 3 -->
+		    <div class="box">
+		      <h3>Step 3:</h3>
+		      <h4><em></em>Determine How Many Solar Panels You Need in Your Array</h4>
+		      <p><em></em><em>How many solar panels do you need? That depends on the panel you 
+		        choose.  </em><em>Select the wattage of the
+	          panel your interested in, and see the results below: </em></p>
+		      <p>
+		        <select name="og_sp_wattage_select" id="og_sp_wattage_select"  onchange="doMath();">
+		          <option value="0">Please Select</option>
+		          <option value="5">5</option>
+		          <option value="10">10</option>
+		          <option value="20">20</option>
+		          <option value="40">40</option>
+		          <option value="50">50</option>
+		          <option value="60">60</option>
+		          <option value="65">65</option>
+		          <option value="70">70</option>
+		          <option value="75">75</option>
+		          <option value="80">80</option>
+		          <option value="85">85</option>
+		          <option value="90">90</option>
+		          <option value="100">100</option>
+		          <option value="110">110</option>
+		          <option value="120">120</option>
+		          <option value="130">130</option>
+		          <option value="135">135</option>
+		          <option value="140">140</option>
+		          <option value="145">145</option>
+		          <option value="150">150</option>
+		          <option value="155">155</option>
+		          <option value="165">165</option>
+		          <option value="170">170</option>
+		          <option value="175">175</option>
+		          <option value="180">180</option>
+		          <option value="185">185</option>
+		          <option value="190">190</option>
+		          <option value="195">195</option>
+		          <option value="200">200</option>
+		          <option value="205">205</option>
+		          <option value="210">210</option>
+		          <option value="215">215</option>
+		          <option value="224">224</option>
+		          <option value="225">225</option>
+		          <option value="235">235</option>
+		          <option value="239">239</option>
+		          <option value="240">240</option>
+		          <option value="245">245</option>
+		          <option value="250">250</option>
+		          <option value="255">255</option>
+		          <option value="260">260</option>
+		          <option value="265">265</option>
+		          <option value="270">270</option>
+		          <option value="275">275</option>
+		          <option value="280">280</option>
+		          <option value="285">285</option>
+		          <option value="290">290</option>
+		          <option value="295">295</option>
+		          <option value="300">300</option>
+		          <option value="310">310</option>
+		          <option value="315">315</option>
+		          <option value="320">320</option>
+		          <option value="325">325</option>
+		          <option value="330">330</option>
+		          <option value="335">335</option>
+		          <option value="340">340</option>
+		          <option value="345">345</option>
+		          <option value="350">350</option>
+		          <option value="355">355</option>
+		          <option value="360">360</option>
+	            </select>
+		        watts per panel </p>
+		      <p>You will need
+  <input type="text" name="og_total_panels" id="og_total_panels" value="" size="6" readonly>
+		        panels for a total of
+		        <input type="text" name="og_total_watts" id="og_total_watts" value="" size="6" readonly>
+		        watts. </p>
+		      <h3>&nbsp;</h3>
+		      <h4><em></em>Sizing your Solar Charge Controller</h4>
+		      <p> You will need a charge controller that can handle
+		        <input type="text" name="og_inverter_watts" id="og_inverter_watts" value="" size="6" readonly>
+		        amps </p>
+		      <p style="padding-left:2em;margin-top:1em;"><em> Sizing a charge controller can be complex, the above answer is a conservative estimate. </em><em>.  Please feel free to call us to find a more accurate fit for your needs.</em> </p>
+<div class="halfspace"></div>
+		      <p><strong>Now that you have sized up the system that fits your needs, call
+		        our  Knowledgeable Sales team at 0720 248 916 and let them help you find the 
+		        exact products for </strong></p>
+		      <p><strong>your system.</strong> </p>
+		      <div class="halfspace"></div>
+		      <p class="center smallprint">&nbsp;</p>
+	        </div>
+		    <input type="button" onclick="document.calc.submit();" value="Save">
+		  </form>
+	  </div>
+		<div class="clear"></div>
+
+
+	</div> <!-- Close Mainpage -->
+
+	<!-- Footer start -->
+	<div id="footer">
+		<div id="footerwrap">
+			<!-- Footer List One -->
+			<div class="footerminibox">
+				<div class="footertitle">Products</div>
+				<div class="footerposts">
+				<ul>
+					<li><a href="#">Products</a></li>
+					<li><a href="#">Services</a></li>
+					
+				</ul>
+				</div>
+			</div>
+			<!-- Footer List Two -->
+			<div class="footerminibox">
+				<div class="footertitle">Company</div>
+				<div class="footerposts">
+				<ul>
+					<li><a href="page.html">Company</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="https://www.facebook.com/cocasolar">Social links</a></li>
+					
+				</ul>
+				</div>
+			</div>
+			<!-- Footer with Social Icons -->
+			<div class="footerminibox">
+				<div class="footertitle">Social</div>
+				<div class="footersocial">
+				<ul>
+					 <li><a href="https://www.facebook.com/cocasolar"><img src="images/icons/facebook_16.png" alt="facebook" /> Facebook</a></li>
+					
+					
+				</ul>
+				</div>
+			</div>
+			<!-- Footer with About and Image -->
+			<div class="footerbox footerspace">
+				<div class="footertitle">About us</div>
+				<div class="footertext">
+					<div class="aboutimage">
+						<a href="#"><img src="images/footer/about.jpg" alt="photo" width="62" height="79" /></a>
+					</div>
+				Cocatech Enterprises Ltd Is a company dealing in renewable energy solutions with specialization in solar energy installations and products including solar lamps, solar laptop chargers and solar plug and play home systems.</div>
+			</div>
+			<!-- Footer with Address -->
+			<div class="footerbox footerspace">
+				<div class="footertitle">Contact Information</div>
+					<div class="footeraddress">
+						<ul>
+							<li>cocatech enterprises</li>
+							<li>Climate Innovation Center,</li>
+							<li>Strathmore University, Kenya</li>
+							<li>Tel1: +354 720248916</li>
+							<li>Tel2: +254 711851762</li>
+							
+							<li>Email: <a href="#">info@cocatechkenya.coml</a></li>
+							
+							<li>Website: <a href="#">cocatechkenya.com</a></li>
+						</ul>
+					</div>
+			</div>
+
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<!-- Footer Blocks End -->
+	<!-- Footer with Copyright and other info -->
+	<div id="footerbarwrap">
+	<ul>
+		<li>Copyright ©cocatechkenya ltd All rights reserved.</li>
+	
+	</ul>
+	</div>
+	<!-- Footer End -->
+</div> <!-- Close Container -->
+<!-- Cufon Activation mainly for IE -->
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>

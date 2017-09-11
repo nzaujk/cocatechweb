@@ -45,7 +45,7 @@ if(isset($_POST['submitted'])) {
 		if(!isset($hasError)) {
 
 			//Fill the following line with your email address
-			$emailTo = 'youremail@mail.com';
+			$emailTo = 'info@cocatechkenya.com';
 			
 			$subject = 'Contact Form Submission from '.$name;
 			$sendCopy = trim($_POST['sendCopy']);
@@ -113,36 +113,36 @@ if(isset($_POST['submitted'])) {
 						<!-- Dropdown end -->
 					</li>
 					<!-- Menu Item End -->
-					<li><a href="page.html">About</a>
+					<li><a href="about.html">About</a>
 						<ul>
-							<li><a href="page.html">Company</a>
+							<li><a href="about.html">Company</a>
 							<ul>
-								<li><a href="page.html">History</a></li>
-								<li><a href="page.html">Profile</a></li>
+								<li><a href="about.html">History</a></li>
+								<li><a href="about.html">Profile</a></li>
 							</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="portfolio-category.html">Products</a>
+					<li><a href="product.html">Products</a>
 						<ul>
-							<li><a href="portfolio-category.html">Solar lamps</a>
+							<li><a href="product.html">Solar lamps</a>
                             <ul>
-                            <li><a href="portfolio-items.html">Beacons</a></li>
-							<li><a href="portfolio-carousel.html">Fosera</a></li>
+                            <li><a href="beacon.html">Beacons</a></li>
+							<li><a href="fosera">Fosera</a></li>
                          </ul>
                     </li>
 							
-							<li><a href="portfolio-recent.html">Solar Water heaters</a>
+							<li><a href="solarwaterheater.html">Solar Water heaters</a>
                             
                         <ul>
-							<li><a href="portfolio-gallery.html">Benefits</a></li>
-							<li><a href="portfolio-galleryset.html">Direct Systems</a></li>
-							<li><a href="fullwidth-portfolioslides.html">Indirect Systems</a></li>
+							
+							<li><a href="direct-indirect.html">Direct Systems</a></li>
+							<li><a href="direct-indirect.html">Indirect Systems</a></li>
 						</ul></ul>
 					</li>
 					
 					<!-- Menu Single Item -->
-					<li><a href="page.html">Power Consumption Calculator</a></li>
+					<li><a href="calculator.html">Power Consumption Calculator</a></li>
 					<li><a href="contact.php">Contact us</a></li>
 				</ul>
 				<br style="clear: left" />
@@ -186,12 +186,15 @@ if(isset($_POST['submitted'])) {
 			</div>	
 			<div class="fulladdress">
 				<ul>
-					<li>Echoes Inc.,</li>
-					<li>2142 Name of Road,</li>
-					<li>CA, USA</li>
-					<li>Tel: +1 234 567 8910</li>
-					<li>Fax: +1 234 567 8910</li>
-					<li>Email: email@youremail.com</li>
+					<li>cocatech enterprises</li>
+							<li>Climate Innovation Center,</li>
+							<li>Strathmore University, Kenya</li>
+							<li>Tel1: +354 720248916</li>
+							<li>Tel2: +254 711851762</li>
+							<
+							<li>Email: <a href="#">info@cocatechkenya.com</a></li>
+							<
+							<li>Website: <a href="http://cocatechkenya.com/">cocatechkenya.com</a></li>
 				</ul>
 			</div>
 		</div>
@@ -247,10 +250,6 @@ if(isset($_POST['submitted'])) {
 				<ul>
 					<li><a href="#">Products</a></li>
 					<li><a href="#">Services</a></li>
-					<li><a href="#">Portfolio</a></li>
-					<li><a href="#">Clients</a></li>
-					<li><a href="#">Testimonials</a></li>
-					<li><a href="#">Links</a></li>
 
 				</ul>
 				</div>
@@ -264,7 +263,6 @@ if(isset($_POST['submitted'])) {
 					<li><a href="#">Company</a></li>
 					<li><a href="#">Contact</a></li>
 					<li><a href="#">Social links</a></li>
-					<li><a href="#">Links</a></li>
 
 				</ul>
 				</div>
@@ -274,11 +272,6 @@ if(isset($_POST['submitted'])) {
 				<div class="footersocial">
 				<ul>
 					<li><a href="#"><img src="images/icons/facebook_16.png" alt="facebook" /> Facebook</a></li>
-					<li><a href="#"><img src="images/icons/twitter_16.png" alt="twitter" /> Twitter</a></li>
-					<li><a href="#"><img src="images/icons/flickr_16.png" alt="flickr" /> Flickr</a></li>
-					<li><a href="#"><img src="images/icons/linkedin_16.png" alt="linkedin" /> Linkedin</a></li>
-					<li><a href="#"><img src="images/icons/tumblr_16.png" alt="facebook" /> Tumblr</a></li>
-					<li><a href="#"><img src="images/icons/mixx_16.png" alt="mixx" /> Mixx</a></li>
 
 				</ul>
 				</div>
@@ -289,22 +282,22 @@ if(isset($_POST['submitted'])) {
 					<div class="aboutimage">
 						<a href="#"><img src="images/footer/about.jpg" alt="photo" /></a>
 					</div>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec, nibh ut feugiat placerat, orci lacus accumsan erat, eget ni sem porttitor arcu velit a lacus. Nam iaculis aliquam. <a href="#">more</a>
-				</div>
+				Cocatech Enterprises Ltd Is a company dealing in renewable energy solutions with <br>
+specialization in solar energy installations and products including solar lamps, solar <br>
+laptop chargers and solar plug and play home systems.</div>
 			</div>
 			<div class="footerbox footerspace">
 				<div class="footertitle">Contact Information</div>
 					<div class="footeraddress">
 						<ul>
-							<li>Echoes Inc.,</li>
-							<li>2142 Name of Road,</li>
-							<li>CA, USA</li>
-							<li>Tel1: +1 234 567 8910</li>
-							<li>Tel2: +1 234 567 8910</li>
-							<li>Fax1: +1 234 567 8910</li>
-							<li>Email: <a href="#">email@youremail.com</a></li>
-							<li>Blog: <a href="#">blog.domain.com</a></li>
-							<li>Website: <a href="#">the.domain.com</a></li>
+							<li>cocatech enterprises</li>
+							<li>Climate Innovation Center,</li>
+							<li>Strathmore University, Kenya</li>
+							<li>Tel1: +354 720248916</li>
+							<li>Tel2: +254 711851762</li>
+							<li></li>
+							<li>Email: <a href="#">info@cocatechkenya.coml</a></li>
+							<li>Website: <a href="#">cocatechkenya.com</a></li>
 						</ul>
 					</div>
 			</div>
